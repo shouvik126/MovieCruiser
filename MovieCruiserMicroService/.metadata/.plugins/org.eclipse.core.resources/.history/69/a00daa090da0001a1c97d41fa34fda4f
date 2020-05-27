@@ -1,0 +1,5 @@
+package com.cognizant.movie.controller;
+
+public class UserController {
+
+}

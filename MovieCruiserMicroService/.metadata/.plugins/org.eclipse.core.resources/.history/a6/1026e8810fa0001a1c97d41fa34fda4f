@@ -1,0 +1,5 @@
+package com.cognizant.movie.bean;
+
+public class User {
+
+}
