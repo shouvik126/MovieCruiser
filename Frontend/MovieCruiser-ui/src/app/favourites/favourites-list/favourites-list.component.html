@@ -1,0 +1,44 @@
+<!-- Cart Notification -->
+<section>
+    <div *ngIf="calculateTotalCount()<=0" class="container ">
+        <h1 class="mx-auto col-md-9 col-ld-7">Favourites</h1>
+        <div class="container-fluid col-md-9 col-ld-7 ">
+            <div class="alert alert-danger ">
+                <h5>No movies in Favourites. Use <a routerLink="/movies">'Add to Favourites'</a> option in Movie List.
+                    <br> 
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="container" *ngIf="calculateTotalCount()>0">
+        <h1 class=" mx-auto col-md-9 col-ld-7">Favourites</h1>
+        <div class="alert alert-success col-md-9 col-ld-7 mx-auto " *ngIf="listItemRemoved">
+            <h4 class="text-success">
+                Favourite movie deleted successfully
+            </h4>
+        </div>
+        <ul class="list-group ">
+
+            <li class="list-group-item d-flex justify-content-between col-md-9 col-ld-7 mx-auto"
+                *ngFor="let item of list.listItems">
+                <h4 class="my-3 text-muted">{{item.name}}</h4>
+                <span class="badge text-danger">
+                    <h5>{{item.boxOffice | currency:'INR'}}</h5>
+                    <a routerLink="/favourites" class="btn btn-default" (click)="removeListItem(item.id)">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </a>
+                </span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between col-md-9 col-ld-7 mx-auto" style="color: black">
+                <h4 class="my-2">Total</h4>
+                <span class="badge text-danger">
+                    <strong>
+                        <h4 class="my-2">{{calculateTotalCount()}}</h4>
+                    </strong>
+                </span>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- Cart Notification End -->

@@ -1,0 +1,80 @@
+<!-- Login form -->
+<section>
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-5 col-md-7 col-sm-9 mx-auto my-5">
+                <div class="card container-fluid" style="width:100%">
+                    <h3 class="text-left login pt-4">Login</h3>
+                    <form class="form-login" (ngSubmit) ="onSubmit(loginForm)" #loginForm="ngForm">
+                        <div 
+                        class="alert alert-info"
+                        *ngIf="authStatus=='cart'"
+                        >
+                            <h5 class="text-dark">Please Login before adding an item to cart.</h5>
+                        </div>
+                        <div 
+                        class="alert alert-danger"
+                        *ngIf = "invalidUser">
+                            <h5 class="text-dark">{{invalidUserMsg}}</h5>
+                        </div>
+                        <div class="form-group  loginelements " style="text-align: left">
+                            <label for="name">
+                                <h6>Username</h6>
+                            </label>
+                            <input 
+                            name="username"
+                            class="form-control" 
+                            style="height: 50px" 
+                            id="name"
+                            placeholder="Enter Username"
+                            ngModel
+                            #username="ngModel"
+                            required>
+                            <small 
+                            class="err-message"
+                            *ngIf="!username.valid && username.touched">Username is required</small>
+                        </div>
+                        
+                        <div class="form-group loginelements " style="text-align: left">
+                            <label for="name">
+                                <h6>Password</h6>
+                            </label>
+                            <input 
+                            type="password" 
+                            class="form-control" 
+                            style="height: 50px" 
+                            id="password"
+                            placeholder="Enter Password" 
+                            name="password"
+                            ngModel 
+                            #password="ngModel"
+                            required>
+                            <small 
+                            class="err-message"
+                            *ngIf="!password.valid && password.touched">Password is required</small>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col loginelements">
+                                <div class="form-group text-left ">
+                                    <button 
+                                    class="btn btn-change btn-lg btn-primary" 
+                                    type="submit">
+                                        <h6 class="loginelements text-white">Login</h6>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col">
+                                <div class="form-group text-center">
+                                    <label for="name">
+                                        <p class="my-3 ">New here? <a routerLink="/signUp">Sign Up</a></p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Login form end -->
