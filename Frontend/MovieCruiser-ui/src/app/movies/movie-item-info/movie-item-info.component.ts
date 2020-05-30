@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, DoCheck } from '@angular/core';
 import { MovieService } from '../movie.service';
 import { AuthService } from 'src/app/site/auth.service';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { ListService } from 'src/app/favourites/list.service';
   templateUrl: './movie-item-info.component.html',
   styleUrls: ['./movie-item-info.component.css']
 })
-export class MovieItemInfoComponent implements OnInit {
+export class MovieItemInfoComponent implements OnInit,DoCheck {
 
   @Input() movieList : Movie[];
   @Output() addedToList = new EventEmitter();
@@ -23,6 +23,28 @@ export class MovieItemInfoComponent implements OnInit {
     private router:Router,
     private listService: ListService
   ) { }
+  ngDoCheck(): void {
+    if(this.isEditAllowed())
+    {
+      //this.movieList = this.movieService.getMovieItemAdmin();
+      this.movieService.getMovieItemAdmin().subscribe(
+        (response)=>{
+          this.movieList = response;
+          console.log(this.movieList)
+        }
+      );
+    }
+    else
+    {
+      this.movieService.getMovieItems().subscribe(
+        (response)=>{
+          this.movieList = response;
+          console.log(this.movieList)
+        }
+      );
+      //this.movieList = this.movieService.getMovieItems(true,new Date());
+    }
+  }
 
   ngOnInit(): void {
     if(this.isEditAllowed())

@@ -29,12 +29,13 @@ export class AuthService {
     private userService: UserService
   ) { }
 
-  login(username : string, password: string):boolean {
+  login(username : string, password: string,response:any):boolean {
     console.log("inside login")
-      this.userService.authenticate(username,password).subscribe(
-      (response)=>{
+      // this.userService.authenticate(username,password).subscribe(
+      // (response)=>{
         this.res = true;
         var decoded = jwt_decode(response.jwt);
+        console.log(decoded)
         console.log(decoded['role'][0]['authority']);
         let role:String = decoded['role'][0]['authority'];
         if(role == 'Admin') {
@@ -62,36 +63,11 @@ export class AuthService {
         }
           
 
-      },
-      (error)=>{
-        this.res =  false;
-      }
-    );
-    // this.user = this.userService.authenticate(username, password);
-    // if(this.user != null && this.user.role == 'admin') {
-    //   this.loggedIn = true;
-    //   this.authenticatedUser = this.user;
-    //   this.isAdmin = true;
-    //   this.isCustomer = false;
-    //   sessionStorage.setItem(AUTHENTICATED_USER,username);
-    //   // this.redirectUrl = '/food-item-info';
-    //   return true;
-    // }
-    // else if(this.user != null && this.user.role == 'customer') {
-    //   this.loggedIn = true;
-    //   this.authenticatedUser = this.user;
-    //   this.isAdmin = false;
-    //   this.isCustomer = true;
-    //   sessionStorage.setItem(AUTHENTICATED_USER,username);
-    //   // this.redirectUrl = '/menu';
-    //   return true;
-    // }
-    // else {
-    //   // this.isCustomer = false;
-    //   // this.isAdmin = true;
-    //   return false;
-    // }
-    //sub.unsubscribe();
+    //   },
+    //   (error)=>{
+    //     this.res =  false;
+    //   }
+    // );
     console.log(this.res);
     return this.res;
 

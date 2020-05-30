@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService:AuthService,
-    private router:Router
+    private router:Router,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -32,15 +34,26 @@ export class LoginComponent implements OnInit {
     console.log(loginForm);
     this.username = loginForm.value.username;
     this.password = loginForm.value.password;
-    this.authenticated = this.authService.login(this.username,this.password);
-    if(this.authenticated)
-    {
-      this.router.navigate([this.authService.redirectUrl]);
-    }
-    else{
-      this.invalidUser = true;
-      this.invalidUserMsg = "Invalid Username and Password";
-    }
+    this.userService.authenticate(this.username,this.password).subscribe(
+      response=>{
+        this.authenticated = this.authService.login(this.username,this.password,response);
+        if(this.authenticated)
+        this.router.navigate([this.authService.redirectUrl]);
+      },
+      error=>{
+        this.invalidUser = true;
+        this.invalidUserMsg = "Invalid Username and Password";
+      }
+    );
+    // this.authenticated = this.authService.login(this.username,this.password);
+    // if(this.authenticated)
+    // {
+    //   this.router.navigate([this.authService.redirectUrl]);
+    // }
+    // else{
+    //   this.invalidUser = true;
+    //   this.invalidUserMsg = "Invalid Username and Password";
+    // }
   }
 }
 

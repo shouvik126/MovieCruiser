@@ -14,11 +14,11 @@ export class SignupComponent implements OnInit {
 
   signUpForm: FormGroup;
   user: user={
-    username : "",
+    userName : "",
     password: "",
-    firstname: "",
-    lastname : "",
-    role : "customer"
+    firstName: "",
+    lastName : "",
+    
   }
   constructor(
     private authService:AuthService,
@@ -28,9 +28,9 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
-      'username': new FormControl(this.user.username,[Validators.required,Validators.maxLength(3)]),
-      'firstname': new FormControl(this.user.firstname,[Validators.required,Validators.maxLength(5)]),
-      'lastname': new FormControl(this.user.lastname,[Validators.required,Validators.maxLength(5)]),
+      'username': new FormControl(this.user.userName,[Validators.required,Validators.maxLength(3)]),
+      'firstname': new FormControl(this.user.firstName,[Validators.required,Validators.maxLength(5)]),
+      'lastname': new FormControl(this.user.lastName,[Validators.required,Validators.maxLength(5)]),
       'passwordGroup': new FormGroup({
         'password': new FormControl(this.user.password,[Validators.required]),
         'confirmPassword': new FormControl('',[Validators.required]),
@@ -62,14 +62,21 @@ export class SignupComponent implements OnInit {
   onSubmit()
   {
     //console.log(this.signUpForm);
-     this.user.username = this.signUpForm.value.username;
-     this.user.firstname = this.signUpForm.value.firstname;
-     this.user.lastname = this.signUpForm.value.lastname;
+     this.user.userName = this.signUpForm.value.username;
+     this.user.firstName = this.signUpForm.value.firstname;
+     this.user.lastName = this.signUpForm.value.lastname;
      this.user.password = this.signUpForm.get('passwordGroup.password').value;
-     this.user.role = "customer";
-     this.userService.addUser(this.user);
+     //this.user.role = "Customer";
+     this.userService.addUser(this.user).subscribe(
+       (response)=>{
+        this.router.navigate([this.authService.redirectUrlLogin])
+       },
+       error=>{
+          console.log(error);
+       }
+     );
      //console.log(this.user);
-    this.router.navigate([this.authService.redirectUrlLogin])
+    //this.router.navigate([this.authService.redirectUrlLogin])
   }
 
 }

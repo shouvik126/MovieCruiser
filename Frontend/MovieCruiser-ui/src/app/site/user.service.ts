@@ -9,28 +9,29 @@ import {map} from 'rxjs/operators';
 export class UserService {
   private authenticationApiUrl = 'http://localhost:8083/authentication-service/authenticate';
 
-  userList : user[] = [{
-    username : 'admin',
-    firstname  :  'admin',
-    lastname : 'account',
-    password : 'admin',
-    role : 'admin'
-  },
-  {
-    username : 'abc',
-    firstname  :  'abc',
-    lastname : 'def',
-    password : 'abc',
-    role : 'customer'
-  }];
+  // userList : user[] = [{
+  //   username : 'admin',
+  //   firstname  :  'admin',
+  //   lastname : 'account',
+  //   password : 'admin',
+  //   role : 'admin'
+  // },
+  // {
+  //   username : 'abc',
+  //   firstname  :  'abc',
+  //   lastname : 'def',
+  //   password : 'abc',
+  //   role : 'customer'
+  // }];
 
   constructor(
     private http: HttpClient
   ) { }
   
   addUser(user: user) {
-    this.userList.push(user);
-    console.log(this.userList);
+    return this.http.post('http://localhost:8083/authentication-service/users',user);
+    // this.userList.push(user);
+    // console.log(this.userList);
 
   }
 
