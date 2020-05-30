@@ -3,6 +3,7 @@ import { user } from './user';
 import { UserService } from './user.service';
 import * as jwt_decode from 'jwt-decode';
 import { RouterLink } from '@angular/router';
+import { Subject } from 'rxjs';
 
 
 export const AUTHENTICATED_USER = 'authenticateUser';
@@ -95,6 +96,7 @@ export class AuthService {
     if(user && token && role=="Admin")
      this.isAdmin = true;
    }
+   console.log("isAdmin->"+this.isAdmin);
    
    return  this.isAdmin;
  }
@@ -123,4 +125,13 @@ export class AuthService {
     if(this.getAuthenticatedUser())
       return sessionStorage.getItem(AUTHENTICATED_TOKEN);
   }
+
+   public _subject = new Subject<any>();
+
+  newEvent(event) {
+    console.log("checked in service")
+    this._subject.next(event);
+  }
+  checkLogout$ = this._subject.asObservable();
+
 }

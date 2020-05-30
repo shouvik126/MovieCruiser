@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, DoCheck } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, DoCheck, OnChanges, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { MovieService } from '../movie.service';
 import { AuthService } from 'src/app/site/auth.service';
 import { Router } from '@angular/router';
@@ -9,58 +9,49 @@ import { ListService } from 'src/app/favourites/list.service';
   templateUrl: './movie-item-info.component.html',
   styleUrls: ['./movie-item-info.component.css']
 })
-export class MovieItemInfoComponent implements OnInit,DoCheck {
+export class MovieItemInfoComponent implements OnInit, DoCheck {
 
-  @Input() movieList : Movie[];
+  @Input() movieList: Movie[];
   @Output() addedToList = new EventEmitter();
   //isCustomer : boolean = this.authService.isCustomer;
-  isCustomer : boolean = this.authService.isUserLoggedIn();
-  itemName : string;
+  isCustomer: boolean = this.authService.isUserLoggedIn();
+  itemName: string;
   itemAdded = false;
   constructor(
-    private movieService:MovieService,
-    private authService:AuthService,
-    private router:Router,
+    private movieService: MovieService,
+    private authService: AuthService,
+    private router: Router,
     private listService: ListService
-  ) { }
+  ) {
+    
+  }
   ngDoCheck(): void {
-    if(this.isEditAllowed())
-    {
-      //this.movieList = this.movieService.getMovieItemAdmin();
-      this.movieService.getMovieItemAdmin().subscribe(
-        (response)=>{
-          this.movieList = response;
-          console.log(this.movieList)
-        }
-      );
-    }
-    else
+    if(!this.authService.isUserLoggedIn())
     {
       this.movieService.getMovieItems().subscribe(
-        (response)=>{
+        (response) => {
           this.movieList = response;
           console.log(this.movieList)
         }
       );
-      //this.movieList = this.movieService.getMovieItems(true,new Date());
+      
     }
   }
+
 
   ngOnInit(): void {
-    if(this.isEditAllowed())
-    {
+    if (this.isEditAllowed()) {
       //this.movieList = this.movieService.getMovieItemAdmin();
       this.movieService.getMovieItemAdmin().subscribe(
-        (response)=>{
+        (response) => {
           this.movieList = response;
           console.log(this.movieList)
         }
       );
     }
-    else
-    {
+    else {
       this.movieService.getMovieItems().subscribe(
-        (response)=>{
+        (response) => {
           this.movieList = response;
           console.log(this.movieList)
         }
@@ -69,35 +60,39 @@ export class MovieItemInfoComponent implements OnInit,DoCheck {
     }
   }
 
-  isEditAllowed():boolean{
+  isEditAllowed(): boolean {
     return this.authService.isUserAdmin();
   }
 
-  addToList(itemId: number)
-  {
+  deleteMovie(movieId:number){
+    this.movieService.deleteMovieItem(movieId).subscribe(
+      response=>{
+        console.log(response);
+      }
+    );
+
+  }
+
+  addToList(itemId: number) {
     //console.log("crt item added");
-    if(this.isCustomer)
-    {
-        this.itemAdded = true;
-        for(var item of this.movieList)
-        {
-          if(item.id==itemId)
-          {
-            this.itemName = item.title;
-          }
+    if (this.isCustomer) {
+      this.itemAdded = true;
+      for (var item of this.movieList) {
+        if (item.id == itemId) {
+          this.itemName = item.title;
         }
-        
-        this.listService.addFavoriteItem(itemId).subscribe(
-          response=>{
-            
-          }
-        );
-        setTimeout(()=>{
-          this.itemAdded = false;
-        },1000);
+      }
+
+      this.listService.addFavoriteItem(itemId).subscribe(
+        response => {
+
+        }
+      );
+      setTimeout(() => {
+        this.itemAdded = false;
+      }, 1000);
     }
-    else
-    {
+    else {
       this.authService.authStatus = 'cart';
       this.router.navigate([this.authService.redirectUrlLogin]);
     }

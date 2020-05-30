@@ -125,6 +125,11 @@ export class MovieService {
     return this.httpService.put(this.baseUrl+'movie-items', movie);
   }
 
+  deleteMovieItem(movieId:number)
+  {
+    return this.httpService.delete(this.baseUrl+'movie-items/'+movieId);
+  }
+
   // addFavoriteItem(user:string, movieId:number)
   // {
   //   return this.httpService.post(this.baseUrl+'favorite-items/'+user+'/'+movieId,{});
