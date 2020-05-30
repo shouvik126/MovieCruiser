@@ -10,7 +10,7 @@
         <div>
             <form 
             [formGroup]="editMovieForm"
-            (ngSubmit)="updateMovieItem()">
+            (ngSubmit)="updateMovieItem(editMovieForm)">
                 <div class="form-group w-100" style="text-align: left">
                     <label for="name">
                         <h5>Movie Name</h5>
@@ -107,14 +107,18 @@
                                 <label class="radio-inline">
                                     <input 
                                     type="radio" 
-                                    value="true"
+                                    [value]="true"
+                                    name="active" 
+                                    id="activeyes"
                                     formControlName="active"
                                     >Yes
                                 </label>
                                 <label class="radio-inline" style="margin-left: 10px;">
                                     <input 
+                                    name="active" 
+                                    id="activeno"
                                     type="radio" 
-                                    value="false"
+                                    [value]="false"
                                     formControlName="active"
                                     
                                     >No

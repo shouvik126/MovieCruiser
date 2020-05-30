@@ -11,17 +11,20 @@ export class HeaderComponent implements OnInit,DoCheck{
 
   isAuthenticated: boolean = false;
   isCustomer: boolean = false;
+  user:String=''
   constructor(
     private authService:AuthService, 
     private router:Router ) { }
 
   ngOnInit(): void {
-    this.isAuthenticated = this.authService.loggedIn;
+    this.user = this.authService.getAuthenticatedUser();
+    this.isAuthenticated = this.authService.isUserLoggedIn();
     this.isCustomer = this.authService.isCustomer;
   }
   ngDoCheck()
   {
-    this.isAuthenticated = this.authService.loggedIn;
+    this.user = this.authService.getAuthenticatedUser();
+    this.isAuthenticated = this.authService.isUserLoggedIn();
     this.isCustomer = this.authService.isCustomer;
   }
   logOut()

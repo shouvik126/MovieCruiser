@@ -53,22 +53,22 @@ export class MovieItemEditComponent implements OnInit {
     
   }
 
-  updateMovieItem()
+  updateMovieItem(editMovieForm:any)
   {
     console.log("under update movie");
-    this.movie.title=this.editMovieForm.value.name;
-    this.movie.boxOffice =this.editMovieForm.value.boxOffice;
-    this.movie.genre = this.editMovieForm.value.category;
-    this.movie.dateOfLaunch =this.editMovieForm.value.dateOfLaunch;
-    if(this.editMovieForm.value.active == "true")
-    {
-      this.movie.active = true;
-    }
-    else{
-      this.movie.active = false;
-    }
-    //this.movie.isActive =this.editMovieForm.value.active;
-    this.movie.hasTeaser =this.editMovieForm.value.hasTrailer;
+    this.movie.title=editMovieForm.value.name;
+    this.movie.boxOffice =editMovieForm.value.boxOffice;
+    this.movie.genre = editMovieForm.value.category;
+    this.movie.dateOfLaunch =editMovieForm.value.dateOfLaunch;
+    // if(this.editMovieForm.value.active == "true")
+    // {
+    //   this.movie.active = true;
+    // }
+    // else{
+    //   this.movie.active = false;
+    // }
+    this.movie.active =editMovieForm.value.active;
+    this.movie.hasTeaser =editMovieForm.value.hasTrailer;
 
     //this.bo.updateBookItem(this.book);
     this.movieService.updateMovieItem(this.movie).subscribe(
