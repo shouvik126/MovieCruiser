@@ -81,11 +81,14 @@
                             <select 
                             id="category" 
                             class="form-control"
+                            name="category"
                             formControlName="category">
                                 <option selected> Select a Type</option>
-                                <option value="MainCourse">Superhero</option>
-                                <option value="Starter">Romance</option>
-                                <option value="Dessert">Thriller</option>
+                                <option value="Superhero">Superhero</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Thriller">Thriller</option>
+                                <option value="Sci-fi">Sci-fi</option>
+                                <option value="Animation">Animation</option>
                             </select>
                             <div 
                             class="text"
@@ -104,14 +107,16 @@
                                 <label class="radio-inline">
                                     <input 
                                     type="radio" 
-                                    [value]="true"
-                                    formControlName="active">Yes
+                                    value="true"
+                                    formControlName="active"
+                                    >Yes
                                 </label>
                                 <label class="radio-inline" style="margin-left: 10px;">
                                     <input 
                                     type="radio" 
-                                    [value]="false"
+                                    value="false"
                                     formControlName="active"
+                                    
                                     >No
                                 </label>
                             </div>

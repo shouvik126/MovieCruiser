@@ -62,6 +62,7 @@ public class MovieDetailsService {
         MovieDetails m=movieDetailsRepository.findById(movieDetails.getId()).get();
         m.setTitle(movieDetails.getTitle());
         m.setBoxOffice(movieDetails.getBoxOffice());
+        System.out.println(movieDetails.isActive());
         m.setActive(movieDetails.isActive());
         System.out.println("Date is "+movieDetails.getDateOfLaunch());
         m.setDateOfLaunch(movieDetails.getDateOfLaunch());

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,7 @@ import { FavouritesListComponent } from './favourites/favourites-list/favourites
 import { MovieItemEditComponent } from './movies/movie-item-edit/movie-item-edit.component';
 import { MovieItemInfoComponent } from './movies/movie-item-info/movie-item-info.component';
 import { MovieSearchComponent } from './movies/movie-search/movie-search.component';
+import { HttpInterceptorService } from './http/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { MovieSearchComponent } from './movies/movie-search/movie-search.compone
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

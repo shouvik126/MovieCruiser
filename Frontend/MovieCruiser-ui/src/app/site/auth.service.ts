@@ -109,12 +109,33 @@ export class AuthService {
 
   isUserAdmin()
  {
+   let user = sessionStorage.getItem(AUTHENTICATED_USER);
+   let token:String = sessionStorage.getItem(AUTHENTICATED_TOKEN);
+   if(user && token)
+   {
+    let onlyToken:string = token.substring(7);
+    let de = jwt_decode(onlyToken);
+    let role=de['role'][0]['authority'];
+    if(user && token && role=="Admin")
+     this.isAdmin = true;
+   }
+   
    return  this.isAdmin;
  }
 
   isUserLoggedIn()
   {
     let user = sessionStorage.getItem(AUTHENTICATED_USER);
+    let token:String = sessionStorage.getItem(AUTHENTICATED_TOKEN);
+    if(token && user)
+    {
+      let onlyToken:string = token.substring(7);
+      let de = jwt_decode(onlyToken);
+      let role=de['role'][0]['authority'];
+      if(role == "Customer")
+       this.isCustomer = true;
+      
+    }
     return !(user===null);
   }
 

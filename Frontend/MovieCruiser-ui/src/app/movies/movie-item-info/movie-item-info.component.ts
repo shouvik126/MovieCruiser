@@ -13,7 +13,8 @@ export class MovieItemInfoComponent implements OnInit {
 
   @Input() movieList : Movie[];
   @Output() addedToList = new EventEmitter();
-  isCustomer : boolean = this.authService.isCustomer;
+  //isCustomer : boolean = this.authService.isCustomer;
+  isCustomer : boolean = this.authService.isUserLoggedIn();
   itemName : string;
   itemAdded = false;
   constructor(
@@ -56,7 +57,12 @@ export class MovieItemInfoComponent implements OnInit {
     if(this.isCustomer)
     {
         this.itemAdded = true;
-        this.itemName = this.listService.addToList(itemId);
+        //this.itemName = this.listService.addToList(itemId);
+        this.listService.addFavoriteItem(itemId).subscribe(
+          response=>{
+            
+          }
+        );
         setTimeout(()=>{
           this.itemAdded = false;
         },1000);

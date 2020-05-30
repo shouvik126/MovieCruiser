@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Movie } from './movie';
 import { AuthService } from '../site/auth.service';
 import { environment } from 'src/environments/environment';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -66,40 +67,75 @@ export class MovieService {
 
   getMovieItemAdmin()
   {
-    return this.httpService.get<any>(this.baseUrl+'movie-items');
+    return this.httpService.get<any>(this.baseUrl+'movie-items')
+    .pipe(
+      map(
+        data=>{
+          this.movies = data;
+          return data;
+        } 
+      )
+    );
   }
 
   getMovieItems(){
     //this.movieFilter= this.movies.filter(x=>x.isActive == active && x.dateOfLaunch < dateOfLaunch); 
     //return this.movieFilter;
-    return this.httpService.get<any>(this.baseUrl+'movie-items');
+    return this.httpService.get<any>(this.baseUrl+'movie-items')
+    .pipe(
+      map(
+        data=>{
+          this.movies = data;
+          return data;
+        }
+
+      )
+    );
   }
 
   search(searchKey: String):Movie[]
   {
-    if (this.authService.isAdmin) {
+    
+    //if (this.authService.isAdmin) {
       this.movieFilter = this.movies.filter(x => x.title.toLowerCase().indexOf(searchKey.toLowerCase()) !== -1)
-    }
-    else
-        this.movieFilter= this.movies.filter(x=>x.title.toLowerCase().indexOf(searchKey.toLowerCase())!==-1 && x.isActive == true && x.dateOfLaunch < new Date()) ;
+    //}
+    //else
+        //this.movieFilter= this.movies.filter(x=>x.title.toLowerCase().indexOf(searchKey.toLowerCase())!==-1 && x.isActive == true && x.dateOfLaunch < new Date()) ;
       return this.movieFilter;
   }
 
-  getMovieItemById(movieId:number): Movie
+  getMovieItemById(movieId:number)
   {
-    for(let movie of this.movies )
-    {
-      if(movie.id == movieId)
-      {
-        return movie;
-      }
-    }
-    return null;
+    // for(let movie of this.movies )
+    // {
+    //   if(movie.id == movieId)
+    //   {
+    //     console.log(movie);
+    //     return movie;
+    //   }
+    // }
+    // return null;
+    return this.httpService.get<any>(this.baseUrl+'movie-items/'+movieId);
   }
 
   updateMovieItem(movie:Movie)
   {
-    const movieId = this.movies.findIndex(fid=>fid.id==movie.id);
-    this.movies[movieId] = movie;
+    //const movieId = this.movies.findIndex(fid=>fid.id==movie.id);
+    //this.movies[movieId] = movie;
+    return this.httpService.put(this.baseUrl+'movie-items', movie);
   }
+
+  // addFavoriteItem(user:string, movieId:number)
+  // {
+  //   return this.httpService.post(this.baseUrl+'favorite-items/'+user+'/'+movieId,{});
+  // }
+
+  // getAllFvoriteItems(user:string)
+  // {
+  //   return this.httpService.get(this.baseUrl+'favorite-items/'+user);
+  // }
+
+  // deleteFavoriteItems(user:String, movieDetailsId:number) {
+  //   return this.httpService.delete(this.baseUrl+'favorite-items/'+user+'/'+movieDetailsId)
+  // }
 }

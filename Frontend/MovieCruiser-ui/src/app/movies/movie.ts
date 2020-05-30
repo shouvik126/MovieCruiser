@@ -2,7 +2,7 @@ export interface Movie {
     id: number;
     title: string;
     boxOffice:number;
-    isActive:boolean;
+    active:boolean;
     dateOfLaunch:Date;
     genre:string;
     hasTeaser:boolean;
