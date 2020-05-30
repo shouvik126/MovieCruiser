@@ -1,0 +1,54 @@
+<!-- Menu Item -->
+<section>
+    <div class="row menu-item">
+        <div *ngFor="let item of movieList" class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="card">
+                <img class="card-img-top" style="background: rgba(2, 117, 216, 0.5);" src={{item.url}} alt={{item.title}}>
+                <div class="card-body">
+                    <h5 class="card-title">{{item.title}}<span class="text-danger float-right">
+                        {{item.boxOffice | currency: 'INR'}}
+                        </span>
+                    </h5>
+                    <p class="card-text text-muted mb-1" *ngIf="isEditAllowed()">
+                        <span class="badge badge-success" *ngIf="item.active">Active</span>
+                        <span class="badge badge-danger" *ngIf="!item.active">InActive</span>
+                        <span> {{item.genre}}</span>
+                        <span class="float-right" *ngIf="item.hasTeaser">
+                            <i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp; 
+                            <span class=" badge badge-info">Trailer</span>
+                        </span>
+                    </p>
+                    <p class="card-text text-muted" *ngIf="!isEditAllowed()">
+                        <span>{{item.genre}}</span>
+                        <span class="float-right" *ngIf="item.hasTeaser">
+                            <i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;
+                            <span class=" badge badge-info">Trailer</span>
+                        </span>
+                    </p>
+                    <h5 class="alert alert-success text-left " *ngIf="itemAdded && itemName == item.title">Movie added
+                        Successfully</h5>
+                    <div class="text-muted" *ngIf="isEditAllowed()">
+                        <div [routerLink]="['/movie-item-edit',item.id]" class="btn btn-primary ml-auto float-right mt-1"
+                        role="button">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>Edit
+                        </div>
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        Launch
+                        <br>
+                        {{item.dateOfLaunch | date: 'dd/MM/yyyy'}}<br>
+                        <button class="btn btn-outline-danger mt-1 float-right" (click)="deleteMovie(item.id)">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+                        </button>
+                    </div>
+                    <p *ngIf="!isEditAllowed()" class="text-muted">
+                        <a (click)="addToList(item.id)" class="btn btn-primary ml-auto float-right text-white"
+                        role="button">
+                            <i class="fa fa-cart-plus" aria-hidden="true"></i>Add to Favourites
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Menu Item End -->

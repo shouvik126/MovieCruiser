@@ -1,5 +1,5 @@
 <!-- Edit Menu Section start -->       
-<section class=" edit-menu-section">
+<section class="edit-menu-section mt-5">
     <div class="container-fluid">
         <h4 class="text-capitalize pt-5" style="text-align: left">Edit Movie</h4><br>
         <div 
@@ -83,7 +83,7 @@
                             class="form-control"
                             name="category"
                             formControlName="category">
-                                <option selected> Select a Type</option>
+                                <option hidden disabled selected> Select a Type</option>
                                 <option value="Superhero">Superhero</option>
                                 <option value="Romance">Romance</option>
                                 <option value="Thriller">Thriller</option>
@@ -148,10 +148,10 @@
                     </div> -->
                 </div>
                 <button 
-                class="btn btn-change btn-lg btn-primary"
+                class="btn btn-primary btn-lg"
                 type="submit"
                 [disabled]="editMovieForm.invalid">
-                    <h6 class="loginelements text-white">Save</h6>
+                    Save
                 </button>
             </form>
             <br>

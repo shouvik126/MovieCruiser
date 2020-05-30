@@ -20,9 +20,11 @@ export class FavouritesListComponent implements OnInit {
     this.error = '';
     this.listService.getAllFvoriteItems().subscribe((response)=>{
       this.list = response['movieDetailsList'];
-      console.log(this.list);
       this.total = response['total'];
-    });
+      },(error)=>{
+        this.error = error.error.errorDescription;
+      }
+    );
     
 
   }

@@ -4,8 +4,10 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-footer',
   template: `
   <!-- Footer Start -->
-  <footer class="page-footer font-small pt-4">
-      <div class="footer-copyright text-center text-white" style="background-color: rgb(0, 26, 255);">Copyright 2020</div>
+  <footer class="navbar text-white bg-primary navbar-expand-sm fixed-bottom">
+    <div>
+        Copyright © 2020
+    </div>
   </footer>
   <!-- Footer End -->
   `,

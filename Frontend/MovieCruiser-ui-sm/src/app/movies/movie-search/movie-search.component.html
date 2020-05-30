@@ -1,0 +1,23 @@
+<!-- Search Section -->
+<section>
+    <div class="container-fluid mb-4" id="search-container">
+        <div class="search-title">
+            <h1 class="text-white">Find Movie</h1>
+        </div>
+        <form>
+            <div class="form-group">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-film" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <input type="text" placeholder="Search Movie" class="form-control" [(ngModel)]="searchKey" (keyup)="search()"
+                    name="search">
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- Search Section End -->
+<app-movie-item-info [movieList]="movieSearch"></app-movie-item-info>

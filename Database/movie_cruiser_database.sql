@@ -62,11 +62,11 @@ CREATE TABLE IF NOT EXISTS `movie`.`favorite` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-insert into movie_details values(1,'Java',99.00,'1','2017-03-15','Programming','1','https://stackify.com/wp-content/uploads/2018/09/Java-Debugging-Tips-1280x720.jpg');
-insert into movie_details values(2,'C-Programming',129.00,'0','2017-12-23','Programming','1','https://img-a.udemycdn.com/course/750x422/700012_a499_9.jpg');
-insert into movie_details values(3,'Database',149.00,0,'2017-08-21','Database','0','https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQlAAt6s_AwBKmTJRDOyc_Pc9yfWLzx6T-2FW0CDF89Qy8o_8L6&usqp=CAU');
-insert into movie_details values(4,'UI design',99.00,'0','2017-02-07','Designing','1','https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSkbtSyP7itNu7sULEcDUKZwLccEvmkwLSQuGqCsg_KgxLjYxo7&usqp=CAU');
-insert into movie_details values(5,'C++Programming',32.00,'1','2022-02-11','Programming','1','https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRqS0KoATr1AL6BpC1k_b96k3MqHfPROfoX00NXCqbggkLntp4D&usqp=CAU');
+insert into movie.movie_details values(1,'Avengers',1518.00,'1','2017-03-15','Superhero','1','https://upload.wikimedia.org/wikipedia/en/8/8a/The_Avengers_%282012_film%29_poster.jpg');
+insert into movie.movie_details values(2,'Titanic',2194.00,'1','2017-12-23','Romance','1','https://upload.wikimedia.org/wikipedia/en/1/19/Titanic_%28Official_Film_Poster%29.png');
+insert into movie.movie_details values(3,'Jurassic World',1671.00,0,'2017-08-21','Sci-fi','0','https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/Jurassic_World_poster.jpg/220px-Jurassic_World_poster.jpg');
+insert into movie.movie_details values(4,'The Lion King',1656.00,'1','2017-02-07','Animation','1','https://upload.wikimedia.org/wikipedia/en/9/9d/Disney_The_Lion_King_2019.jpg');
+insert into movie.movie_details values(5,'Avengers: Endgame',2797.00,'1','2022-02-11','Superhero','1','https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg');
  insert into role values(1,'Admin');
  select * from book_details;
 insert into role values(2,'Customer');

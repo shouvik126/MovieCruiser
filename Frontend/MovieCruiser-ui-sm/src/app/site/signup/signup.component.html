@@ -1,10 +1,10 @@
 <!-- Signup form start -->
 <section>
-    <div class="container">
+    <div class="container mt-4">
         <div class="row text-center mb-5">
             <div class="col-lg-5 col-md-7 col-sm-9 mx-auto my-5">
                 <div class="card container-fluid" style="width:100%">
-                    <h4 class="text-left my-3">Signup</h4>
+                    <h4 class="text-left my-4">Signup</h4>
                     <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-lg-6">
@@ -91,7 +91,7 @@
                         formGroupName="passwordGroup">
                             
         
-                                <div class="col-md my-1 text-left">
+                                <div class="col-md text-left">
                                     <div class="form-group">
                                         <label for="password">
                                             <h6>Password</h6>
@@ -112,7 +112,7 @@
                                         </div>
                                     </div><br>
                                 </div>
-                                <div class="col-md my-1 text-left">
+                                <div class="col-md text-left">
                                     <div class="form-group">
                                         <label for="confirmPassword">
                                             <h6>Confirm Password</h6>
@@ -143,10 +143,10 @@
                             <div class="col-md-6 col loginelements">
                                 <div class="form-group text-left ">
                                     <button 
-                                    class="btn btn-change btn-lg btn-primary"                                     
+                                    class="btn btn-change btn-lg btn-primary text-white"                                     
                                     type="submit"
                                     [disabled]="signUpForm.invalid">
-                                        <h4 class="loginelements text-white">Signup</h4>
+                                        Signup
                                     </button>
                                 </div>
                             </div>

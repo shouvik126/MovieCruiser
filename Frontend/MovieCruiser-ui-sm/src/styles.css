@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Segoe UI, Arial, Helvetica, sans-serif;
+}
+
 .navbar{
     background-color:rgb(0, 26, 255);
   }
@@ -32,3 +38,15 @@
   .err-message{
     color: red;
   }
+
+  #search-container {
+    padding: 125px 100px 100px;
+    background-image: url("https://images.unsplash.com/photo-1471877325906-aee7c2240b5f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+    background-position: auto;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: contain;
+}

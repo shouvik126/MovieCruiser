@@ -105,8 +105,6 @@ export class AuthService {
     if(user && token && role=="Admin")
      this.isAdmin = true;
    }
-   console.log("isAdmin->"+this.isAdmin);
-   
    return  this.isAdmin;
  }
 
@@ -138,7 +136,7 @@ export class AuthService {
    public _subject = new Subject<any>();
 
   newEvent(event) {
-    console.log("checked in service")
+    
     this._subject.next(event);
   }
   checkLogout$ = this._subject.asObservable();
