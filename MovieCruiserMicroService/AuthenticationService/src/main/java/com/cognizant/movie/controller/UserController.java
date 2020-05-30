@@ -12,7 +12,7 @@ import com.cognizant.movie.exception.UserAlreadyExistsException;
 import com.cognizant.movie.security.AppUserDetailsService;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 public class UserController {
 	
 	@Autowired

@@ -57,7 +57,14 @@ export class MovieItemInfoComponent implements OnInit {
     if(this.isCustomer)
     {
         this.itemAdded = true;
-        //this.itemName = this.listService.addToList(itemId);
+        for(var item of this.movieList)
+        {
+          if(item.id==itemId)
+          {
+            this.itemName = item.title;
+          }
+        }
+        
         this.listService.addFavoriteItem(itemId).subscribe(
           response=>{
             

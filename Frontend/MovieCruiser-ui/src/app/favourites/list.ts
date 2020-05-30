@@ -7,6 +7,6 @@ export interface List
     // listTotal: number;
 
     id:number;
-    name: string;
-    price: number;
+    title: string;
+    boxOffice: number;
 }

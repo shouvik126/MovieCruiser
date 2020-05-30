@@ -17,8 +17,8 @@ import com.cognizant.movie.security.AppUserDetailsService;
 import com.cognizant.movie.service.FavoriteService;
 
 @RestController
-@RequestMapping("/favorite-items")
-@CrossOrigin("http://localhost:4200")
+@RequestMapping("/movie-items/favorite-items")
+//@CrossOrigin("http://localhost:4200")
 public class FavoriteController {
 	@Autowired
 	public FavoriteService favoriteService;
@@ -28,9 +28,9 @@ public class FavoriteController {
 	
 	@PostMapping("/{userId}/{movieDetailsId}")
 	public void addFavoriteItem(@PathVariable String userId, @PathVariable long movieDetailsId) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String user = authentication.getName();
-		UserDetails userDetails = appUserDetailsService.loadUserByUsername(user);
+		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//String user = authentication.getName();
+		//UserDetails userDetails = appUserDetailsService.loadUserByUsername(user);
 		favoriteService.addFavoriteItem(userId, movieDetailsId);
 		//favoriteService.addFavoriteItem(userDetails., movieDetailsId);
 	}

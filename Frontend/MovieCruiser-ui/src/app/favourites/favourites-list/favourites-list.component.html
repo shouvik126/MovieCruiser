@@ -1,5 +1,52 @@
 <!-- Cart Notification -->
 <section>
+    <div *ngIf="total == 0 && error !=''" class="container ">
+        <h1 class="mx-auto col-md-9 col-ld-7">Favourites</h1>
+        <div class="container-fluid col-md-9 col-ld-7 ">
+            <div class="alert alert-danger ">
+                <h5>{{error}}
+                    <br> 
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="container" *ngIf="total!=0">
+        <h1 class=" mx-auto col-md-9 col-ld-7">Favourites</h1>
+        <div class="alert alert-success col-md-9 col-ld-7 mx-auto " *ngIf="total != 0 && status == 1">
+            <h4 class="text-success">
+                Favourite movie deleted successfully
+            </h4>
+        </div>
+        <ul class="list-group ">
+
+            <li class="list-group-item d-flex justify-content-between col-md-9 col-ld-7 mx-auto"
+            *ngFor="let item of list">
+                <h4 class="my-3 text-muted">{{item.title}}</h4>
+                <span class="badge text-danger">
+                    <h5>{{item.boxOffice}}</h5>
+                    <a routerLink="/favourites" class="btn btn-default" (click)="deleteFavoriteItem(item.id)">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </a>
+                </span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between col-md-9 col-ld-7 mx-auto" style="color: black">
+                <h4 class="my-2">Total</h4>
+                <span class="badge text-danger">
+                    <strong>
+                        <h4 class="my-2">Rs.{{total}}</h4>
+                    </strong>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="alert alert-danger col-sm-4" *ngIf="list.length==0" style="margin: auto">No Items in the favorite <a routerLink="/favorites">Add to favorites</a></div>
+</section>
+<!-- Cart Notification End -->
+
+
+<!-- Cart Notification -->
+<!-- <section>
     <div *ngIf="calculateTotalCount()<=0" class="container ">
         <h1 class="mx-auto col-md-9 col-ld-7">Favourites</h1>
         <div class="container-fluid col-md-9 col-ld-7 ">
@@ -40,5 +87,5 @@
             </li>
         </ul>
     </div>
-</section>
+</section> -->
 <!-- Cart Notification End -->

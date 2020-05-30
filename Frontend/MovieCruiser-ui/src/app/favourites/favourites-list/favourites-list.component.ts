@@ -9,7 +9,7 @@ import { ListService } from '../list.service';
 })
 export class FavouritesListComponent implements OnInit {
 
-  list: List[];
+  list: List[]=[];
   total: number;
   status: number = 0;
   error: String;
@@ -20,7 +20,7 @@ export class FavouritesListComponent implements OnInit {
     this.error = '';
     this.listService.getAllFvoriteItems().subscribe((response)=>{
       this.list = response['movieDetailsList'];
-
+      console.log(this.list);
       this.total = response['total'];
     });
     
@@ -36,6 +36,7 @@ export class FavouritesListComponent implements OnInit {
         (response)=>{
           this.list = response['movieDetailsList'];
           this.total = response['total'];
+          
         },(error)=>{
           this.error = error.error.errorDescription;
         }

@@ -17,7 +17,7 @@ import com.cognizant.movie.security.AppUserDetailsService;
 import com.cognizant.movie.security.JwtUtil;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 public class AuthenticationController {
 
 	@Autowired

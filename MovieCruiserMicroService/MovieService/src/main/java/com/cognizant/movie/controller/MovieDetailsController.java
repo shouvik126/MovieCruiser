@@ -27,7 +27,7 @@ import com.cognizant.movie.service.MovieDetailsService;
 
 @RestController
 @RequestMapping("/movie-items")
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 public class MovieDetailsController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MovieDetailsController.class);
 	

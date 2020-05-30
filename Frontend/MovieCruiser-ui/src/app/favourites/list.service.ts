@@ -16,14 +16,14 @@ export class ListService {
   movie: any;
   movieItemId: number;
   total: number = 0;
-  baseUrl=environment.baseUrl+'/favorite-items/';
+  baseUrl=environment.baseUrl+'/movie-service/'+'/movie-items/favorite-items/';
   constructor(private authenticationService: AuthService, private httpService: HttpClient) {
     
   }
 
   getAllFvoriteItems()
   {
-    return this.httpService.get(this.baseUrl+'favorite-items/'+this.authenticationService.getAuthenticatedUser());
+    return this.httpService.get(this.baseUrl+this.authenticationService.getAuthenticatedUser());
   }
   
   // getAllCartItems() {
@@ -38,7 +38,8 @@ export class ListService {
   //   return this.httpService.get(this.baseUrl+"cart-items/"+this.user,httpOptions);
   // }
 
-  deleteFavoriteItems(movieDetailsId:number) {
+  deleteFavoriteItems(movieDetailsId:number) 
+  {
     return this.httpService.delete(this.baseUrl+this.authenticationService.getAuthenticatedUser()+'/'+movieDetailsId)
   }
   
