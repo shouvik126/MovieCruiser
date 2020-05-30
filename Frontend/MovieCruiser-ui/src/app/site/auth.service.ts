@@ -84,6 +84,15 @@ export class AuthService {
     
   }
 
+  isUserCustomer()
+  {
+    if(this.isUserLoggedIn())
+    {
+      return this.isCustomer;
+    }
+    return this.isCustomer;
+  }
+
   isUserAdmin()
  {
    let user = sessionStorage.getItem(AUTHENTICATED_USER);

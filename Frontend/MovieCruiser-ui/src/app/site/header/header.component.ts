@@ -29,8 +29,8 @@ export class HeaderComponent implements OnInit,DoCheck{
   }
   logOut()
   {
-    this.onClick();
     this.authService.logOut();
+    this.onClick();
     this.router.navigate([this.authService.redirectUrl]);
   }
 

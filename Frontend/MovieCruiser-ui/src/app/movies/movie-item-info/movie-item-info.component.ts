@@ -14,7 +14,8 @@ export class MovieItemInfoComponent implements OnInit, DoCheck {
   @Input() movieList: Movie[];
   @Output() addedToList = new EventEmitter();
   //isCustomer : boolean = this.authService.isCustomer;
-  isCustomer: boolean = this.authService.isUserLoggedIn();
+  //isCustomer: boolean = this.authService.isUserLoggedIn();
+  isCustomer: boolean = this.authService.isUserCustomer();
   itemName: string;
   itemAdded = false;
   constructor(
@@ -26,16 +27,39 @@ export class MovieItemInfoComponent implements OnInit, DoCheck {
     
   }
   ngDoCheck(): void {
-    if(!this.authService.isUserLoggedIn())
-    {
-      this.movieService.getMovieItems().subscribe(
-        (response) => {
-          this.movieList = response;
-          console.log(this.movieList)
+    this.authService._subject.subscribe({
+      next:(response)=>{
+        this.isCustomer = this.authService.isUserCustomer();
+        if (this.isEditAllowed()) {
+          //this.movieList = this.movieService.getMovieItemAdmin();
+          this.movieService.getMovieItemAdmin().subscribe(
+            (response) => {
+              this.movieList = response;
+              console.log(this.movieList)
+            }
+          );
         }
-      );
+        else {
+          this.movieService.getMovieItems().subscribe(
+            (response) => {
+              this.movieList = response;
+              console.log(this.movieList)
+            }
+          );
+          //this.movieList = this.movieService.getMovieItems(true,new Date());
+        }
+      }
+    });
+    // if(!this.authService.isUserLoggedIn())
+    // {
+    //   this.movieService.getMovieItems().subscribe(
+    //     (response) => {
+    //       this.movieList = response;
+    //       console.log(this.movieList)
+    //     }
+    //   );
       
-    }
+    // }
   }
 
 
@@ -67,6 +91,7 @@ export class MovieItemInfoComponent implements OnInit, DoCheck {
   deleteMovie(movieId:number){
     this.movieService.deleteMovieItem(movieId).subscribe(
       response=>{
+        this.authService.newEvent('delete');
         console.log(response);
       }
     );
